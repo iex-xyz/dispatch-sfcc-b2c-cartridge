@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="${URLUtils.staticURL('css/style.css')}">
+    
+	<!-- At a certain point we need to do 2 HTTP calls so I added axios here -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<div id="ckoApplePay" class="apple-pay-button apple-pay-button-text-buy" lang=en></div>
+  
+        <!-- Adding an error message to show in case Apple Pay is not possible -->
+	<p style="display:none" id="ckoApplePayError">ApplePay is not available in this environment.</p>
+
+	<script src="https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js"></script>
+  
+    <script type="text/javascript" src="${URLUtils.staticURL('js/applepayapp.js')}"></script>
+
+    
+</body>
+</html>

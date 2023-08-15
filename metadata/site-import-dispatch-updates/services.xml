@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">    
+
+    <service-credential service-credential-id="DispatchOAuth">
+        <url>https://account.demandware.com/dwsso/oauth2/access_token</url>
+        <user-id>${YOUR_ADMIN_API_CLIENT_ID}</user-id>
+        <password masked="true">********</password>
+    </service-credential>
+
+    <service-credential service-credential-id="DispatchSCAPIHost">
+        <url>https://${YOUR_SHORT_CODE}.api.commercecloud.salesforce.com</url>
+        <user-id>${YOUR_ORG_ID}</user-id>
+        <password masked="true">********</password>
+    </service-credential>
+
+    <service-credential service-credential-id="DispatchServiceCredentials">
+        <url>https://oms-gateway.dispatch.co/api/sfcc/sync</url>
+        <user-id/>
+        <password masked="true"></password>
+    </service-credential>
+
+    <service-credential service-credential-id="DispatchTestServiceCredentials">
+        <url>https://oms-gateway.dispatch.co/api/sfcc/test-connection</url>
+        <user-id/>
+        <password masked="true">********</password>
+    </service-credential>    
+
+    <service-profile service-profile-id="DispatchProfile">
+        <timeout-millis>3000</timeout-millis>
+        <rate-limit-enabled>true</rate-limit-enabled>
+        <rate-limit-calls>5</rate-limit-calls>
+        <rate-limit-millis>3000</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>5</cb-calls>
+        <cb-millis>500</cb-millis>
+    </service-profile>
+
+    <service service-id="dispatch.http.scapi">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>DispatchProfile</profile-id>
+        <credential-id>DispatchSCAPIHost</credential-id>
+    </service>
+
+    <service service-id="dispatch.http.service">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>DispatchProfile</profile-id>
+        <credential-id>DispatchServiceCredentials</credential-id>
+    </service>
+
+    <service service-id="dispatch.http.slasauth">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>DispatchProfile</profile-id>
+        <credential-id>DispatchOAuth</credential-id>
+    </service>
+
+    <service service-id="dispatch.http.testservice">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>DispatchProfile</profile-id>
+        <credential-id>DispatchTestServiceCredentials</credential-id>
+    </service>
+
+</services>

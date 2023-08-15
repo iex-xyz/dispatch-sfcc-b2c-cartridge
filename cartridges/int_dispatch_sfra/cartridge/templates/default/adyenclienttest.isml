@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<iscontent type="text/html" charset="UTF-8" />
+<link rel="stylesheet" href="https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/5.2.0/adyen.css">
+
+ <body>
+
+     <div id="customCard-container" class="payment-method__container">
+          <label>
+               <span>Card number:</span>
+               <span data-cse="encryptedCardNumber"></span>
+          </label>
+          <label>
+               <span>Expiry date:</span>
+               <span data-cse="encryptedExpiryDate"></span>
+          </label>
+          <label>
+               <span>CVV/CVC:</span>
+               <span data-cse="encryptedSecurityCode"></span>
+          </label>
+     </div>     
+ </body>    
+
+<script src="https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/5.2.0/adyen.js"></script>
+ <script type="text/javascript" src="${URLUtils.staticURL('js/adyentest.js')}"></script>
+</html>

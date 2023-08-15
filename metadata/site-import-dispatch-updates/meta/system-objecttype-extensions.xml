@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <type-extension type-id="Order">        
+        <custom-attribute-definitions>            
+            <attribute-definition attribute-id="Dispatch_paymentErrorMessage">
+                <display-name xml:lang="x-default">Payment Error Message</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>            
+        </custom-attribute-definitions>        
+    </type-extension>
+    
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>            
+            <attribute-definition attribute-id="DispatchAPIKey">
+                <display-name xml:lang="x-default">Dispatch API Key</display-name>
+                <description xml:lang="x-default">Dispatch API Key for communication with Dispatch Service</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="DispatchAccountID">
+                <display-name xml:lang="x-default">Dispatch Account ID</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="DispatchCatalogID">
+                <display-name xml:lang="x-default">Dispatch Catalog ID</display-name>
+                <description xml:lang="x-default">Dispatch will fetch products from this Catalog for the Ads</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="DispatchEnabled">
+                <display-name xml:lang="x-default">Dispatch Enabled</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="DispatchPMClientKey">
+                <display-name xml:lang="x-default">Payment Method Publishable/Client Key</display-name>
+                <description xml:lang="x-default">Publishable/Client Key of the Preferred Payment Method. Dispatch uses this to encrypt credit card data</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="DispatchPreferredPM">
+                <display-name xml:lang="x-default">Preferred Payment Method</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>            
+            <attribute-definition attribute-id="DispatchSettingsURL">
+                <display-name xml:lang="x-default">Settings URL</display-name>
+                <description xml:lang="x-default">URL pointing to Dispatch-Settings endpoint i.e https://&lt;URL&gt;/Dispatch-Settings</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="DispatchSiteID">
+                <display-name xml:lang="x-default">Site ID</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>            
+        </custom-attribute-definitions>
+        <group-definitions>            
+            <attribute-group group-id="Dispatch Configs">
+                <display-name xml:lang="x-default">Dispatch Configurations</display-name>
+                <attribute attribute-id="DispatchEnabled"/>
+                <attribute attribute-id="DispatchAPIKey"/>
+                <attribute attribute-id="DispatchAccountID"/>                
+                <attribute attribute-id="DispatchSiteID"/>
+                <attribute attribute-id="DispatchPMClientKey"/>
+                <attribute attribute-id="DispatchCatalogID"/>
+                <attribute attribute-id="DispatchPreferredPM"/>
+                <attribute attribute-id="DispatchSettingsURL"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>

@@ -1,0 +1,5 @@
+cartridges/**/cartridge/static/
+documentation/
+tests/
+protractor-conf.js
+webpack.config.js

@@ -1,0 +1,122 @@
+<iscontent type="text/html" charset="UTF-8" />
+
+<isdecorate template="application/MenuFrame">
+    <isset name="activePaymentMethods" value="${require('*/cartridge/scripts/helpers/dispatchBmHelper').getActivePaymentMethods()}" scope="page" />
+	<isset name="catalogs" value="${require('*/cartridge/scripts/helpers/dispatchBmHelper').getCatalogs()}" scope="page" />
+	<isset name="pmClientKey" value="${require('*/cartridge/scripts/helpers/dispatchBmHelper').getPMClientKey()}" scope="page" />
+	<isset name="dispatchAPIKey" value="${require('*/cartridge/scripts/helpers/dispatchBmHelper').getDispatchAPIKey()}" scope="page" />
+	<isset name="dispatchAccountID" value="${require('*/cartridge/scripts/helpers/dispatchBmHelper').getDispatchAccountID()}" scope="page" />
+	<isset name="orgID" value="${require('*/cartridge/scripts/helpers/dispatchBmHelper').getOrganizationID()}" scope="page" />
+	<isset name="siteID" value="${require('*/cartridge/scripts/helpers/dispatchBmHelper').getSiteID()}" scope="page" />
+	<isset name="settingsURL" value="${require('*/cartridge/scripts/helpers/dispatchBmHelper').getSettingsURL()}" scope="page" />
+    <h1 class="dw-nc-text-heading dw-nc-text-heading-large dw-nc-text-brand">${Resource.msg('dispatchsetting.title','dispatchbm', null)}</h1>
+    <p>${Resource.msg('dispatchsetting.info','dispatchbm', null)}</p>
+
+        <form class="dispatch-settings-form" id="dispatch-settings-form"
+		action="${URLUtils.url('DispatchSettings-HandleSettings')}" method="POST"> 		    
+
+	    <table width="100%" cellspacing="15" cellpadding="0" border="0">
+			<tbody>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('dispatchsetting.dispatchapikey','dispatchbm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="dispatch_api_key" name="dispatch_api_key" value="${dispatchAPIKey}" required  />
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('dispatchsetting.dispatchaccountid','dispatchbm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="dispatch_account_id" name="dispatch_account_id" value="${dispatchAccountID}" required  />
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('dispatchsetting.orgid','dispatchbm', null)}
+					</td>
+					<td style="width:70%">
+						${orgID}					
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('dispatchsetting.siteid','dispatchbm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="dispatch_siteID" name="dispatch_siteID" value="${siteID}" required  />
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('dispatchsetting.settingsurl','dispatchbm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="dispatch_settingsURL" name="dispatch_settingsURL" value="${settingsURL}" required  />
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('dispatchsetting.catalogid','dispatchbm', null)}
+					</td>
+					<td style="width:70%">						
+						<select name="dispatch_catalog" id="dispatch_catalog">
+							<isloop items="${catalogs}" var="catalog">                            
+								<option value="${catalog.id}" <isif condition="${catalog.isactive}">selected</isif>>
+										${catalog.name} 
+								</option>
+							</isloop>
+						</select>				
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('dispatchsetting.preferredpaymentmethod','dispatchbm', null)}
+					</td>
+					<td style="width:70%">
+                     <select name="dispatch_preferredpaymentmethod" id="dispatch_preferredpaymentmethod">
+                        <isloop items="${activePaymentMethods}" var="activePaymentMethod">                            
+                               <option value="${activePaymentMethod.id}" <isif condition="${activePaymentMethod.isactive}">selected</isif>>
+                                    ${activePaymentMethod.name} 
+                               </option>                                                   
+                        </isloop>
+                    </select>						
+					</td>
+				</tr>                
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('dispatchsetting.clientkey','dispatchbm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="dispatch_client_key" name="dispatch_client_key" value="${pmClientKey}" required  />
+					</td>
+				</tr>	
+	            <tr>
+				</tr>
+				<tr>
+					<input type="hidden" name="verifier"  id="verifier" value="" />
+					<input type="hidden" name="challenge"  id="challenge" value="" />
+					<input type="hidden" name="actionType"  id="actionType" value="" />
+					<td style="width:20%">
+						<button type="submit" name="submit" class="button dispatch-settings-sync-submit">${Resource.msg('dispatchsetting.sync','dispatchbm', null)}</button>
+						&nbsp;&nbsp;
+						<button type="submit" name="submit" class="button dispatch-test-settings-submit">${Resource.msg('dispatchsetting.test','dispatchbm', null)}</button>
+					</td>					
+					<td style="width:60%">
+					</td>
+				</tr>
+				<tr id="tr-settings-sync-result">			
+					<td id="td-settings-sync-result" colspan="2">
+						<strong id="settings-sync-result"></strong>
+					</td>
+				</tr>
+			</tbody>
+	    </table>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+	<script type="text/javascript" src="${URLUtils.staticURL('js/dispatchbm.js')}"></script>
+</isdecorate>

@@ -188,6 +188,8 @@ exports.callSCAPIPublicGuestAuth = function(requestParams, organizationID) {
             svc.setRequestMethod('GET');
             svc.setAuthentication('NONE');
             svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            svc.client.setAllowRedirect(false);
         },
         filterLogMessage: function (msg) {
             return msg.replace('headers', '');            
@@ -199,21 +201,44 @@ exports.callSCAPIPublicGuestAuth = function(requestParams, organizationID) {
     });
 
     try {
-        serviceResult = service.call();        
-
-        if (serviceResult.status === 'OK') {
-            jsonResponse = JSON.parse(serviceResult.object);
-        }
-        else {
-            jsonResponse = JSON.parse(serviceResult.errorMessage);
-        }
         
+        serviceResult = service.call();    
+
+        if(serviceResult.error === 303) {
+
+            var locationHeader = service.client.getResponseHeader('Location'); 
+
+            if(locationHeader.indexOf('usid') === -1) {
+                var errorParam = 'error_description';
+                var errorDescription = locationHeader.substring(locationHeader.indexOf(errorParam)+errorParam.length+1,
+                                        locationHeader.length);
+
+
+                jsonResponse = {                    
+                    error: true,
+                    message: dw.crypto.Encoding.fromURI(errorDescription)
+                    };
+
+                dispatchLogHelper.log('Location Header: '+locationHeader);                
+            }
+            else {
+
+                jsonResponse = {            
+                    error: false,            
+                    };
+            } 
+        }
+        else { 
+            jsonResponse = JSON.parse(serviceResult.errorMessage);
+            jsonResponse.error = true;
+        }        
     } catch (e) {
 
         dispatchLogHelper.log('Dispatch: '+e.toString());
 
         jsonResponse = {
             statusCode: 403,
+            error: true,
             message: e.message
             };
     }

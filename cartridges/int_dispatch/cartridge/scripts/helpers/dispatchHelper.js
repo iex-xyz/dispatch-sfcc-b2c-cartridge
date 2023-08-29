@@ -134,7 +134,7 @@ exports.testShopperLogin = function(verifier, challenge, settingsURL) {
 
     var dispatchServiceMgr = require('*/cartridge/scripts/services/dispatchServiceMgr');    
 
-    let redirectURI = settingsURL.substring(0, settingsURL.indexOf('Dispatch-Settings')).concat('Dispatch-SLASRetriveCode');
+    let redirectURI = settingsURL.substring(0, settingsURL.indexOf('Dispatch-Settings')).concat('SLASCallback-RetrieveCode');
     let requestParams = 'redirect_uri='+redirectURI+
                         '&response_type=code'+
                         '&client_id='+this.getClientID()+

@@ -2,7 +2,15 @@
 	"hooks": [
 		{
 			"name": "dw.order.payment.authorizeCreditCard",
-			"script":"./hooks/adyen_ocapi"
-		}
+			"script":"./hooks/payments/adyen"
+		},
+		{
+            "name": "dw.ocapi.shop.basket.afterPATCH",
+            "script": "./hooks/basket/basket"
+        },
+        {
+            "name": "dw.ocapi.shop.basket.afterPOST",
+            "script": "./hooks/basket/basket"
+        }
 	]
 }

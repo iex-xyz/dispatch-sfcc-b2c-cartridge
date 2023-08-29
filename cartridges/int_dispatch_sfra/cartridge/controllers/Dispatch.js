@@ -102,27 +102,6 @@ server.get('AdyenCheckoutPaymentMethods', function (req, res, next){
     next();
 });
 
-server.get('SLASRetriveCode', function (req, res, next){
-
-    let jsonResponse;
-
-    if(req.querystring.error) { 
-        jsonResponse = {
-            error: true,
-            message: req.querystring.error_description            
-        }        
-    }
-    else { 
-        jsonResponse = {
-            usid: req.querystring.usid,
-            code: req.querystring.code  
-        }                  
-    }
-
-    res.json(jsonResponse);
-    next();
-});
-
 server.get('OrderDetail', consentTracking.consent, server.middleware.https, function (req, res, next) {
 
     var OrderMgr = require('dw/order/OrderMgr');

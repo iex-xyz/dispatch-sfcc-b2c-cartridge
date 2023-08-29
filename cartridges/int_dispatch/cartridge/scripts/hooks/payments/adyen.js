@@ -8,7 +8,7 @@ var constants = require('*/cartridge/adyenConstants/constants');
 var Transaction = require('dw/system/Transaction');
 var OrderMgr = require('dw/order/OrderMgr');
 var Order = require('dw/order/Order');
-var Logger = require('dw/system/Logger');
+var dispatchLogHelper = require('~/cartridge/scripts/helpers/dispatchLogHelper');
 
 /* Script Modules */
 
@@ -45,10 +45,11 @@ exports.authorizeCreditCard = function (order, paymentInstrument, cvc) {        
         else {
             
             Transaction.begin();
-
+            
             OrderMgr.placeOrder(order);
             order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
-            order.setExportStatus(Order.EXPORT_STATUS_READY);            
+            order.setExportStatus(Order.EXPORT_STATUS_READY);  
+            order.custom.Dispatch_paymentErrorMessage = null;             
 
             Transaction.commit();
         }        
@@ -58,7 +59,8 @@ exports.authorizeCreditCard = function (order, paymentInstrument, cvc) {        
             var o = JSON.parse(e.callResult.errorMessage);
             m = o.error.message;
         }
-        Logger.error('Error: {0}', e.message);        
+        
+        dispatchLogHelper.log('Error: {0}', e.message);        
 
         order.custom.Dispatch_paymentErrorMessage = m;
         return new Status(Status.ERROR, m);

@@ -5,8 +5,8 @@
 
 	<menuitem id="dispatch-plugin" site="true">
         <name xml:lang="x-default">Dispatch</name>
-        <short_description xml:lang="x-default">Manage the Dispatch plugin functionality: preferences.</short_description>
-        <description xml:lang="x-default">Manage the Dispatch plugin functionality: preferences.</description>
+        <short_description xml:lang="x-default">Manage the Dispatch Settings.</short_description>
+        <description xml:lang="x-default">Manage the Dispatch Settings.</description>
 		<icon>images/dispatch_logo.png</icon>
     </menuitem>	
 
@@ -17,7 +17,6 @@
  		<exec pipeline="DispatchSettings" node="Start"/>
 		<sub-pipelines>
             <pipeline name="DispatchSettings-HandleSettings"/>
-			<pipeline name="DispatchSettings-Settings"/>
         </sub-pipelines>
         <icon>images/dispatch_logo.png</icon>
 	</menuaction>

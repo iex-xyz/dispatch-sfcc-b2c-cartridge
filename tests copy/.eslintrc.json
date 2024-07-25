@@ -1,0 +1,24 @@
+{
+    "env": {
+      "mocha": true
+    },
+    "globals": {
+      "session": "off",
+      "empty": "off",
+      "customer": "off",
+      "request": "off",
+      "dw": "off"
+    },
+    "parserOptions": {
+      "ecmaVersion": 6
+    },
+    "rules": {
+      "require-jsdoc": "off",
+      "max-len": "off",
+      "quote-props": "off",
+      "no-new": "off",
+      "valid-jsdoc": "off",
+      "no-unused-expressions": "off"
+    }
+  }
+  
